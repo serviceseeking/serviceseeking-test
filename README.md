@@ -36,8 +36,16 @@
 10. **Rspec**
 
 
-##Your aim##
-Try to achieve as many of the points above as you can.  It's also an opportunity to show off your strengths.  Feel free to introduce anything that makes us go, "wow" even if it goes beyond the scope of the use cases.
+## Your aim ##
+Try to achieve as many of the points above as you can.  It's also an opportunity to show off your strengths.  Feel free to introduce anything that makes us go, "wow" even if it goes beyond the scope of the use cases.  You're welcome to add gems; in some cases above you'll have to anyway.
+
 
 ## Timing ##
 You have two days to complete the task.
+
+
+## Test Submission ##
+1. Fork this repo.
+2. Pull your version and write theyour code.
+3. When the code is completed, submit a pull request against our Service Seeking's version.
+4. We will review your code and will get in touch with you after that.
