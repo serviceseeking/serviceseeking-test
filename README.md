@@ -3,7 +3,7 @@
 The task is simple: build a to-do list.  You can make this as simple or as tricky as you like.
 
 ## Use Cases
-    As a user, when I visit the home page, I should be able to see:
+    **As a user**, when I visit the home page, I should be able to see:
   
     - a responsive page written in bootstrap;
     - a form to insert to-do list items;
@@ -11,15 +11,15 @@ The task is simple: build a to-do list.  You can make this as simple or as trick
       - home; and
       - to-do list.
       
-  As a user, when I add a to-do list item and click "save", I should see a page with my to-do list.
+  **As a user**, when I add a to-do list item and click "save", I should see a page with my to-do list.
   
-  As a user, when I visit the to-do list page and I click "edit", I should see the edit form of the to-do list.
+  **As a user**, when I visit the to-do list page and I click "edit", I should see the edit form of the to-do list.
   
-  As a user, when I visit the edit page of my to-do list, update my to-do list item and click "update", I should  see my to-do list with the updated item.
+  **As a user**, when I visit the edit page of my to-do list, update my to-do list item and click "update", I should  see my to-do list with the updated item.
   
-  As a user, when I visit the to-do list page and I click "delete", I should be asked to confirm my deletion.
+  **As a user**, when I visit the to-do list page and I click "delete", I should be asked to confirm my deletion.
   
-  As a user, when I visit the to-do list page and I click "delete" and confirm the deletion, my to-do list item should be deleted and I should be redirected to the index page of to-do items.
+  **As a user**, when I visit the to-do list page and I click "delete" and confirm the deletion, my to-do list item should be deleted and I should be redirected to the index page of to-do items.
 
 
 ##What we are looking for##
