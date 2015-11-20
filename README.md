@@ -1,9 +1,8 @@
-# serviceseeking-test
-
-The task is simple: build a to-do list.  You can make this as simple or as tricky as you like.
+## Task
+   Build a to-do list.
 
 ## Use Cases
-    **As a user**, when I visit the home page, I should be able to see:
+    As a user, when I visit the home page, I should be able to see:
   
     - a responsive page written in bootstrap;
     - a form to insert to-do list items;
