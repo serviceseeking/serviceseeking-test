@@ -1,0 +1,52 @@
+.navbar{
+	background: #000;
+	.brand{ 
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 20px;
+		vertical-align: middle;
+		color: #fff;
+	}
+	.navbar-inner {
+		.container{
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			.brand{ 
+				display: inline-block;
+				margin: 10px;
+			}
+			.home, .todo-list{ 
+				text-decoration: none;
+				font-weight: bold;
+				font-size: 18px;
+				display: inline-block;
+				cursor: pointer;
+				position: relative;
+				top: 3px;
+			}
+			.divider{ 
+				display: inline-block;
+				color: white;
+				font-weight: bold;
+				margin: 0 5px;
+			}
+			.logout{
+				color: rgb(255, 255, 255);
+				font-weight: bold;
+				font-size: 15px;
+				vertical-align: middle;
+				float: right;
+				position: relative;
+				top: 13px;
+				left: -25px;
+				cursor: pointer;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+.main.container{
+	margin-top: 90px;
+}

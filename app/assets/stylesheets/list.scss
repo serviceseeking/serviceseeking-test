@@ -1,0 +1,37 @@
+.new-todo-container { 
+  margin-bottom: 20px;
+  .caption{ 
+    display: inline-block
+  }
+}
+
+
+
+
+
+$odd-row-background: #f9f9f9;
+table.todo-list{
+  border-spacing: 1px;
+  background-color: black;
+  width: 100%;
+  th { 
+    color: #fff;
+  }
+  tbody{
+    tr:nth-child(even){
+      background: $odd-row-background;
+    }
+    tr:nth-child(odd){
+      background: #fff;
+    }
+    tr:hover{
+      background: red;
+    }
+    td.action{
+      a{
+        margin-right:  10px;
+        text-decoration: none;
+      }
+    }
+  }
+}

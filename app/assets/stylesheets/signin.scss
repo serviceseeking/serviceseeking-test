@@ -1,0 +1,19 @@
+.login-signup-container{ 
+	.row {
+		margin: 5px 0;
+	}
+	.span4{ 
+		display: inline-block;
+		&.login-btn{ 
+			position: relative;
+			left: 210px;
+		}
+	}
+	.caption { 
+		width: 70px;
+		margin-right: 10px;
+	}
+	.signup-container a{ 
+		text-decoration: none;
+	}
+}
