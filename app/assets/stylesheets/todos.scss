@@ -1,0 +1,15 @@
+.edit-todo-container{ 
+	.row{
+		margin: 5px 0;
+	}
+	.span4{ 
+		display: inline-block;
+		&.caption{ 
+			width: 75px;
+		}
+	}
+	.update-todo {
+		position: relative;
+		left: 193px;
+	}
+}
