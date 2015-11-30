@@ -8,7 +8,27 @@
 </head>
 <body>
 
-<%= yield %>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">Todo</a>
+      <% if current_user %>
+	      <a class="home">Home</a>
+	      <div class='divider'> | </div>
+	      <a class="todo-list" href='/list'>Todo List</a>
+	      <a class="logout" href='/logout'>Logout</a>
+	  <% end %>
+    </div>
+  </div>
+</div>
 
+<div class='container main'>
+	<% flash.each do |key, value| %>
+		<div class="alert alert-<%= key %>"><%= value %></div>
+	<% end %>
+	<div class='row'>
+		<div class='span12'><%= yield %></div>
+	</div>
+</div>
 </body>
 </html>

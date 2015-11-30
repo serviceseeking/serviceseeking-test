@@ -3,12 +3,12 @@ class TodosController < ApplicationController
 	end
 
 	def list
-
 	end
 
 	def create
-		params[:user_id] = current_user.id
-		run Todo::Create do |op|
+		form Todo::Create , current_user: current_user
+		result, contract = @operation.run
+		if result
 			return redirect_to(list_path)
 		end
 		render :list
@@ -21,14 +21,18 @@ class TodosController < ApplicationController
 
 
 	def update_todo
-		run Todo::Update do |op|
+		form Todo::Update, id: params[:todo][:id]
+		result, contract = @operation.run
+		if result
 			return redirect_to(list_path)
 		end
 		render :list
 	end
 
 	def destroy
-		run Todo::Destroy do |op|
+		form Todo::Destroy, id: params[:id]
+		result, contract = @operation.run
+		if result
 			return redirect_to(list_path)
 		end
 		render :list

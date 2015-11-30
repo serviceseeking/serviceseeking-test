@@ -25,6 +25,7 @@
 
 :javascript
 	$(function(){
+		alert('yo!');
 		$('.add-new-todo').click(function(event){
 			var title, description;
 			title = $('input.title').val()
@@ -37,7 +38,7 @@
 			}).done(function(data){
 				window.location.assign('/list')
 			});
-		})
+		});
 
 		$('#destroy').click(function(event){
 			event.preventDefault()
