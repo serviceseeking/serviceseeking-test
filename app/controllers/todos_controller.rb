@@ -6,11 +6,11 @@ class TodosController < ApplicationController
 	end
 
 	def create
-		form Todo::Create , current_user: current_user
-		result, contract = @operation.run
-		if result
+		params.merge!(current_user: current_user)
+		run Todo::Create do |op|
 			return redirect_to(list_path)
 		end
+		error_messages_to_flash(@operation.contract.errors.messages)
 		render :list
 	end
 
@@ -21,11 +21,10 @@ class TodosController < ApplicationController
 
 
 	def update_todo
-		form Todo::Update, id: params[:todo][:id]
-		result, contract = @operation.run
-		if result
+		run Todo::Update do |op|
 			return redirect_to(list_path)
 		end
+		error_messages_to_flash(@operation.contract.errors.messages)
 		render :list
 	end
 
@@ -38,5 +37,11 @@ class TodosController < ApplicationController
 		render :list
 	end
 
+	private
 
+		def error_messages_to_flash(error_messages)
+			error_messages.each do |k,v|
+				flash[k] = "#{k.to_s} #{v.join}"
+			end
+		end
 end

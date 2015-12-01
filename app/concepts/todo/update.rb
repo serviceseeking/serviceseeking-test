@@ -1,19 +1,18 @@
 class Todo::Update < Trailblazer::Operation
 
 	contract do 
-		def prepopulate!(options)
-			@model = Todo.find(options[:id])
-		end
+		property :title
+		property :description
+
+		validates :title, presence: true
+		validates :description, presence: true
 	end
 
 	def process(params)
-		title = @params[:todo][:title] || ''
-		description = @params[:todo][:description] || ''
-		if @contract.model
-			@valid = @contract.model.update_attributes({title: title, 
-				description: description})
-		else
-			@valid = false
+		@model = Todo.find(params[:todo][:id])
+		validate(params[:todo], @model) do |todo|
+			todo.save
 		end
+		
 	end
 end

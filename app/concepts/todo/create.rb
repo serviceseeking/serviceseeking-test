@@ -1,20 +1,17 @@
 class Todo::Create < Trailblazer::Operation
 	
 	contract do 
-		def prepopulate!(options)
-			@model = options[:current_user] 
-		end
+		property :title
+		property :description
+
+		validates :title, presence: true
+		validates :description, presence: true
 	end
 
 	def process(params)
-		title = @params[:title] || ''
-		description = @params[:description] || ''
-		if @contract.model
-			@valid = @contract.model.todos.create({title: title, 
-				description: description})
-		else
-			@valid = false
+		@model = params[:current_user].todos.new if params[:current_user]
+		validate(params.except(:current_user), @model) do |todo|
+			todo.save
 		end
-			
 	end
 end

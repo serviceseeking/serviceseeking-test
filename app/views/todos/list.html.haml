@@ -14,18 +14,18 @@
 			%th Action
 	%tbody
 		- current_user.todos.each do |todo|
-			%tr{'data-todo-id' => todo.id}
-				%td.title
-					= todo.title
-				%td.description
-					= todo.description
-				%td.action
-					= link_to 'Edit', edit_todo_path(todo)
-					%a#destroy{href:"/destroy_todo/#{todo.id}"} Destroy
+			- if todo.id
+				%tr{'data-todo-id' => todo.id}
+					%td.title
+						= todo.title
+					%td.description
+						= todo.description
+					%td.action
+						= link_to 'Edit', edit_todo_path(todo)
+						%a#destroy{href:"/destroy_todo/#{todo.id}"} Destroy
 
 :javascript
 	$(function(){
-		alert('yo!');
 		$('.add-new-todo').click(function(event){
 			var title, description;
 			title = $('input.title').val()
