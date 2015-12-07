@@ -1,16 +1,21 @@
 class Todo::Create < Trailblazer::Operation
 	
+	include Model
+
+	model Todo, :create
+
 	contract do 
 		property :title
 		property :description
+		property :user_id
 
 		validates :title, presence: true
 		validates :description, presence: true
+		validates :user_id, presence: true
 	end
 
 	def process(params)
-		@model = params[:current_user].todos.new if params[:current_user]
-		validate(params.except(:current_user), @model) do |todo|
+		validate(params) do |todo|
 			todo.save
 		end
 	end

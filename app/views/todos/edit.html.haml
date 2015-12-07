@@ -2,14 +2,14 @@
 	%h1.title Edit To Do Entry
 	%form{action: '/update_todo'}
 		.row
-			%input.hidden{name: "todo[id]", value: @todo.id}
+			%input.hidden{name: "id", value: @todo.id}
 			.span4.caption Title:
 			.span4
-				%input.title{name: "todo[title]", value: @todo.title}
+				%input.title{name: "title", value: @todo.title}
 		.row
 			.span4.caption Description:
 			.span4
-				%input.title{name: "todo[description]", value: @todo.description}
+				%input.title{name: "description", value: @todo.description}
 		.row
 			.span4
 				%button.update-todo Update

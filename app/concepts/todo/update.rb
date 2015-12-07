@@ -1,5 +1,9 @@
 class Todo::Update < Trailblazer::Operation
 
+	include Model
+
+	model Todo, :update
+
 	contract do 
 		property :title
 		property :description
@@ -9,10 +13,8 @@ class Todo::Update < Trailblazer::Operation
 	end
 
 	def process(params)
-		@model = Todo.find(params[:todo][:id])
-		validate(params[:todo], @model) do |todo|
+		validate(params) do |todo|
 			todo.save
 		end
-		
 	end
 end

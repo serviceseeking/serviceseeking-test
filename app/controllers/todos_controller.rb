@@ -6,7 +6,7 @@ class TodosController < ApplicationController
 	end
 
 	def create
-		params.merge!(current_user: current_user)
+		params.merge!(user_id: current_user.id)
 		run Todo::Create do |op|
 			return redirect_to(list_path)
 		end
@@ -29,11 +29,10 @@ class TodosController < ApplicationController
 	end
 
 	def destroy
-		form Todo::Destroy, id: params[:id]
-		result, contract = @operation.run
-		if result
+		run Todo::Destroy do |op|
 			return redirect_to(list_path)
 		end
+		error_messages_to_flash(@operation.contract.errors.messages)
 		render :list
 	end
 
