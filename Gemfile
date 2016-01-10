@@ -61,3 +61,7 @@ gem 'cells'
 
 # Rest client
 gem 'rest'
+
+group :development, :test do
+  gem 'rspec-rails'
+end
