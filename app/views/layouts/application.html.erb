@@ -7,8 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+  	<div class='navbar-header'>
+  		<div class='navbar-brand'><a href='/'>Todo</a></div>
+  	</div>
+  	<div class='navbar-collapse collapse'>
+  	<ul class="nav navbar-nav">
+  		<li><a href='/todo_lists'>Lists</a></li>
+  	</ul>
+  	</div>
+  </div>
+</nav>
+<div class='main-contents'>
 <%= yield %>
-
+</div>
 </body>
 </html>
