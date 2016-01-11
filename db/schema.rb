@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160110095653) do
+ActiveRecord::Schema.define(version: 20160111030826) do
 
   create_table "todo_lists", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -23,12 +23,14 @@ ActiveRecord::Schema.define(version: 20160110095653) do
   add_index "todo_lists", ["user_id"], name: "index_todo_lists_on_user_id", using: :btree
 
   create_table "todos", force: :cascade do |t|
-    t.integer  "user_id",     limit: 4
-    t.string   "title",       limit: 255
-    t.string   "description", limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "title",        limit: 255
+    t.string   "description",  limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "todo_list_id", limit: 4
   end
+
+  add_index "todos", ["todo_list_id"], name: "index_todos_on_todo_list_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",      limit: 255
@@ -40,4 +42,5 @@ ActiveRecord::Schema.define(version: 20160110095653) do
   end
 
   add_foreign_key "todo_lists", "users"
+  add_foreign_key "todos", "todo_lists"
 end

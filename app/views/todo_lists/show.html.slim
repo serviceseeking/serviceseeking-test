@@ -1,8 +1,20 @@
 p#notice = notice
+p#alert = alert
 
 p
   strong Name:
   = @todo_list.name
+
+table.table
+  thead
+    tr
+      th Todo
+      th Actions
+  tbody
+    - @todo_list.todos.each do |todo|
+      tr
+        td= todo.title
+        td= link_to 'Show', todo
 
 = link_to 'Edit', edit_todo_list_path(@todo_list)
 '|
