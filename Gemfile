@@ -31,7 +31,9 @@ gem 'slim-rails'
 # # Trailblazer framework
 gem 'trailblazer'
 gem 'trailblazer-rails' # if you are in rails.
+
 gem 'cells'
+gem 'cells-slim'
 
 # Rest client
 gem 'rest'

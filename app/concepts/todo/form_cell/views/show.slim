@@ -1,0 +1,7 @@
+= form_for :todo, url: action_url, html: {method: :post} do |f|
+  = f.text_field :title, placeholder: 'title'
+  br
+  = f.text_field :description, placeholder: 'description'
+  br
+  = f.submit
+

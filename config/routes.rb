@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  resources :todo_lists
-  resources :todo_lists
-  root to: 'todo_lists#index'
+  root to: 'pages#index'
 
   resources :todo_lists
   resources :todos
