@@ -1,5 +1,8 @@
 class TodosController < ApplicationController
 
+  def new
+  end
+
   def create
     run Todo::Create do
       return redirect_to @model.list, notice: "To-do was successfully created!"

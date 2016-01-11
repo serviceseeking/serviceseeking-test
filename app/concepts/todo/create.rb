@@ -18,7 +18,7 @@ class Todo::Create < Trailblazer::Operation
     todo = @model = Todo.new(params.require(:todo).permit(:title, :description))
 
     # find or create the parent list for the todo
-    if params[:todo_list_id] == nil
+    if params[:todo_list_id].blank?
       todo_list = TodoList.find_or_create_by(name: "Default To-do List")
 
       # Find or create the owner of the todo_list:
