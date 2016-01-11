@@ -1,0 +1,10 @@
+h1 Your Todo Lists
+
+table.table
+  thead
+    tr
+      th Name
+  tbody
+    - @todo_lists.each do |todo_list|
+      tr
+        td = link_to todo_list.name, todo_list
