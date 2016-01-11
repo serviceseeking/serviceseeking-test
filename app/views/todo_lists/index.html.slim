@@ -1,21 +1,10 @@
-h1 Listing todo_lists
+h1 Your Todo Lists
 
-table
+table.table
   thead
     tr
       th Name
-      th
-      th
-      th
-
   tbody
     - @todo_lists.each do |todo_list|
       tr
-        td = todo_list.name
-        td = link_to 'Show', todo_list
-        td = link_to 'Edit', edit_todo_list_path(todo_list)
-        td = link_to 'Destroy', todo_list, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Todo list', new_todo_list_path
+        td = link_to todo_list.name, todo_list
