@@ -1,7 +1,9 @@
 = form_for @form do |f|
+  - if @form.model.new_record?
+    = f.hidden_field :todo_list_id, value: params[:todo_list_id]
   .row
     .col-xs-12
-      = f.text_field :name, autofocus: true, class: "form-control", placeholder: "Todo List Name"
+      = f.text_field :title, autofocus: true, class: "form-control", placeholder: "Todo"
   br
   .row
     .col-xs-12

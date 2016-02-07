@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def index
-    @todo = Todo.new
+  	form Todo::Create
   end
 end
