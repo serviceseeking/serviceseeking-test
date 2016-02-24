@@ -1,3 +1,9 @@
 div style="margin-top: 15%;"
 .well style="width: 45%; margin-left: auto; margin-right: auto;"
-  =concept('todo/form_cell', @todo)
+	= form_for @form do |f|
+		= f.hidden_field :todo_list_id, value: params[:todo_list_id]
+
+		.form-group
+			= f.text_field :title, placeholder: 'do something useful', class: 'form-control input-lg', autofocus: true
+		.form-group
+			= f.submit "Save", class: 'btn btn-success btn-block'

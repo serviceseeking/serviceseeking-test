@@ -1,10 +1,15 @@
-h1 Your Todo Lists
+.panel.panel-default
+	.panel-heading
+		h3 Your Todo Lists
+	.panel-body
+		.pull-right
+			= link_to "Add Todo List", new_todo_list_path, class: "btn btn-primary", remote: true
+		table.table.table-striped.table-hover
+		  thead
+		    tr
+		      th Name
+		      th width="10%"
+		  tbody
+		  	= concept("todo_list/cell/table")
 
-table.table
-  thead
-    tr
-      th Name
-  tbody
-    - @todo_lists.each do |todo_list|
-      tr
-        td = link_to todo_list.name, todo_list
+= render "partials/modal"

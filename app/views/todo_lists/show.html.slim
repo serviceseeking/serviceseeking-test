@@ -1,15 +1,15 @@
-p#notice = notice
-p#alert = alert
+.panel.panel-default
+	.panel-heading
+		h3 = @todo_list.name
+	.panel-body
+		.pull-right
+			= link_to "Create a new todo", new_todo_list_todo_path(@todo_list), class: 'btn btn-primary', remote: true
+		table.table.table-striped.table-hover
+		  thead
+		    tr
+		      th Todo
+		      th width="10%"
+		  tbody
+				= concept("todo/cell/table")
 
-h2 Listing items on #{@todo_list.name}
-
-table.table
-  thead
-    tr
-      th Todo
-  tbody
-    - @todo_list.todos.each do |todo|
-      tr
-        td= todo.title
-
-= link_to "Create a new todo", new_todo_list_todo_path(@todo_list), class: 'btn btn-success'
+= render "partials/modal"
