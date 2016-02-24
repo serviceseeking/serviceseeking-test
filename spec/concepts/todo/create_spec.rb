@@ -5,7 +5,7 @@ RSpec.describe Todo::Create do
     params = {todo: {title: 'Test Title'}}
     todo = Todo::Create.(params).model
 
-    expect(todo.persisted?).to be_truthy
+    expect(todo.persisted?).to be
     expect(todo.title).to eq 'Test Title'
   end
 end

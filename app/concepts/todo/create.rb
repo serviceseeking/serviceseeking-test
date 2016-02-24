@@ -46,20 +46,15 @@ class Todo::Create < Trailblazer::Operation
   #   todo.save!
   # end
 
+  include Model
+  model Todo, :create
+
   contract do
     property :title, validates: {presence: true, length: {maximum: 160}}
   end
 
   def process(params)
-    # There's an issue on strong parameters with rspec
-    # Comment this line below for rspec
-    todo_params = params.require(:todo).permit(:title, :description)
-    # Uncomment this line below for rspec
-    # todo_params = params[:todo]
-
-    todo = Todo.create(todo_params)
-
-    validate(todo_params, todo) do
+    validate(params[:todo], model) do
       contract.save
 
       todo_list_id = params[:todo_list_id]
@@ -81,10 +76,8 @@ class Todo::Create < Trailblazer::Operation
         todo_list = TodoList.find todo_list_id
       end
 
-      todo.list = todo_list
-      todo.save
-
-      @model = todo
+      model.list = todo_list
+      model.save
     end
   end
 end
