@@ -54,30 +54,29 @@ class Todo::Create < Trailblazer::Operation
   end
 
   def process(params)
-    validate(params[:todo], model) do
-      contract.save
-
-      todo_list_id = params[:todo_list_id]
-
-      if todo_list_id.blank?
-        todo_list = TodoList.find_or_create_by name: 'Default To-do List'
-
-        current_user_id = params[:current_user_id]
-
-        if current_user_id.blank?
-          current_user = User.create fullname: 'Guest'
-        else
-          current_user = User.find current_user_id
-        end
-
-        todo_list.user = current_user
-        todo_list.save
-      else
-        todo_list = TodoList.find todo_list_id
-      end
-
+    validate(params[:todo]) do
+      # I dont want to keep the todo_list_id and current_user_id
+      # those parameters are not useful
+      todo_list = TodoList.find_or_create_by name: 'Default To-do List'
+      current_user = User.create fullname: 'Guest'
+      todo_list.user = current_user
       model.list = todo_list
-      model.save
+      contract.save
+      # if todo_list_id.blank?
+      #   todo_list = TodoList.find_or_create_by name: 'Default To-do List'
+      #   current_user_id = params[:current_user_id]
+      #   if current_user_id.blank? 
+      #     current_user = User.create fullname: 'Guest'
+      #   else
+      #     current_user = User.find current_user_id
+      #   end
+      #   todo_list.user = current_user
+      #   todo_list.save
+      # else
+      #   todo_list = TodoList.find todo_list_id
+      # end
+      # model.list = todo_list
+      # model.save
     end
   end
 end
