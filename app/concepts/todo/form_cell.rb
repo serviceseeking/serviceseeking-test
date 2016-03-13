@@ -14,14 +14,14 @@ class Todo::FormCell < Cell::Concept
 
   def default_prompt
     if todo_list.present?
-      "Create a new todo on #{todo_list.name}"
+      "New todo on #{todo_list.name}"
     else
       "What would you like to do?"
     end
   end
 
   def todo_list
-    TodoList.where(params[:todo_list_id]).first
+    TodoList.where(id: params[:todo_list_id]).first
   end
 
   def action_url

@@ -1,50 +1,37 @@
 class Todo::Create < Trailblazer::Operation
+  contract do
+    property :title, validates: {presence: true}
+  end
 
-  # Logic for creating a TODO
-  #     if `todo_list` is specified
-  #         create the `todo`
-  #         associated with `todo_list`
-  #     else
-  #         create the `todo`
-  #         create a `user`
-  #         create a default `todo_list`
-  #         associate `todo_list` with `user`
-  #         associate `todo` with `todo_list`
   def process(params)
-    # make sure title is not blank
-    return invalid! if params[:todo][:title].blank?
+    @model = Todo.new
 
-    # build the todo
-    todo = @model = Todo.new(params.require(:todo).permit(:title, :description))
-
-    # find or create the parent list for the todo
-    if params[:todo_list_id].blank?
-      todo_list = TodoList.find_or_create_by(name: "Default To-do List")
-
-      # Find or create the owner of the todo_list:
-      ##### If current_user_id is present, fetch that user
-      ##### otherwise, create a new one
-      current_user =
-        if params[:current_user] == nil
-          if params[:current_user_id] == nil
-            User.create!(fullname: "Guest")
-          else
-            User.find(params[:current_user_id])
-          end
-        else
-          params[:current_user]
-        end
-
-      # assign the todo_list to the user
-      todo_list.user = current_user
-      todo_list.save!
-    else # i.e. if params[:todo_list_id] is not nil
-      todo_list = TodoList.find(params[:todo_list_id])
+    validate(params[:todo], @model) do |f|
+      find_or_create_todo_list(params[:todo_list_id])
+      find_or_create_user(params[:current_user_id])
+      f.save
     end
+  end
 
-    # associate the todo with the todo_list
-    todo.list = todo_list
-    todo.save!
+  def find_or_create_todo_list(todo_list_id)
+    todo_list = if todo_list_id
+                  TodoList.find(todo_list_id)
+                else
+                  TodoList.find_or_create_by(name: "Default To-do List")
+                end
+
+    @model.list = todo_list
+  end
+
+  def find_or_create_user(current_user_id)
+    user = if current_user_id
+             User.find(current_user_id)
+           else
+             User.find_or_create_by(fullname: "Guest")
+           end
+
+    todo_list = @model.list
+    todo_list.user = user
   end
 
 end
