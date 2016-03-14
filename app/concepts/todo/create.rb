@@ -1,37 +1,33 @@
 class Todo::Create < Trailblazer::Operation
+  include Model
+  model Todo, :create
+
   contract do
     property :title, validates: {presence: true}
   end
 
   def process(params)
-    @model = Todo.new
-
-    validate(params[:todo], @model) do |f|
-      find_or_create_todo_list(params[:todo_list_id])
-      find_or_create_user(params[:current_user_id])
+    tlid, cuid = params[:todo_list_id], params[:current_user_id]
+    validate(params[:todo]) do |f|
+      find_or_create_todo_list(tlid, cuid)
       f.save
     end
   end
 
-  def find_or_create_todo_list(todo_list_id)
-    todo_list = if todo_list_id
-                  TodoList.find(todo_list_id)
-                else
-                  TodoList.find_or_create_by(name: "Default To-do List")
-                end
+  def find_or_create_todo_list(tlid, cuid)
+    params = todo_list_params(tlid, cuid)
+    result = TodoList::Create.(params)
 
-    @model.list = todo_list
+    @model.list = result.model
   end
 
-  def find_or_create_user(current_user_id)
-    user = if current_user_id
-             User.find(current_user_id)
-           else
-             User.find_or_create_by(fullname: "Guest")
-           end
-
-    todo_list = @model.list
-    todo_list.user = user
+  def todo_list_params(tlid, cuid)
+    {
+      todo_list: {
+        id: tlid,
+        user_id: cuid,
+      },
+    }
   end
 
 end
