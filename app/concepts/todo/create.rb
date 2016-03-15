@@ -7,18 +7,17 @@ class Todo::Create < Trailblazer::Operation
   end
 
   def process(params)
-    tlid, cuid = params[:todo_list_id], params[:current_user_id]
     validate(params[:todo]) do |f|
-      find_or_create_todo_list(tlid, cuid)
       f.save
+
+      tlid, cuid = params[:todo_list_id], params[:current_user_id]
+      model.list = find_or_create_todo_list(tlid, cuid)
     end
   end
 
   def find_or_create_todo_list(tlid, cuid)
     params = todo_list_params(tlid, cuid)
-    result = TodoList::Create.(params)
-
-    @model.list = result.model
+    TodoList::Create.(params).model
   end
 
   def todo_list_params(tlid, cuid)
