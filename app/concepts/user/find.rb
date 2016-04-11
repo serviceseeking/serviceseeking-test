@@ -1,7 +1,6 @@
 class User::Find < Trailblazer::Operation
 
   def process(params)
-    model.save!
   end
 
   def model!(params)
