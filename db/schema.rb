@@ -13,8 +13,11 @@
 
 ActiveRecord::Schema.define(version: 20160111030826) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "todo_lists", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
+    t.integer  "user_id"
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -27,7 +30,7 @@ ActiveRecord::Schema.define(version: 20160111030826) do
     t.string   "description",  limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.integer  "todo_list_id", limit: 4
+    t.integer  "todo_list_id"
   end
 
   add_index "todos", ["todo_list_id"], name: "index_todos_on_todo_list_id", using: :btree

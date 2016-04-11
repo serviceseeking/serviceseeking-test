@@ -5,12 +5,13 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: mysql2
+  adapter: postgresql
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
+  password: seeking
   database: sstest_development
 
 # Warning: The database defined as "test" will be erased and

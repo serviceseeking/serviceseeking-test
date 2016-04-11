@@ -21,7 +21,7 @@ class Todo::FormCell < Cell::Concept
   end
 
   def todo_list
-    TodoList.where(params[:todo_list_id]).first
+    TodoList.where(id: params[:todo_list_id]).first
   end
 
   def action_url
