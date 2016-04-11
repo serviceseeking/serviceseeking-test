@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User::Find do
   it "finds a user guest" do
-    todo = Todo::Create.(todo: {title: "Testing helps!"}).model
-    expect(todo.list.user.fullname).to eq("Guest")
+    user = User::Find.(todo: {title: "Testing helps!"}).model
+    expect(user.fullname).to eq("Guest")
   end
 end

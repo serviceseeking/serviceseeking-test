@@ -8,7 +8,7 @@ class TodoList::Find < Trailblazer::Operation
     if params[:todo_list_id].blank?
       TodoList.find_or_create_by(name: "Default To-do List")
     else
-      TodoList.find(id: params[:todo_list_id])
+      TodoList.find(params[:todo_list_id])
     end
   end
 
