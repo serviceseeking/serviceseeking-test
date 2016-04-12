@@ -8,9 +8,12 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'jquery-rails'
 
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'byebug'
+  gem 'tzinfo-data'
+  gem 'mysql2'
 end
 
 group :development do
