@@ -5,6 +5,8 @@
 #   gem 'sqlite3'
 #
 default: &default
+  username: root
+  password: password
   adapter: mysql2
   pool: 5
   timeout: 5000
