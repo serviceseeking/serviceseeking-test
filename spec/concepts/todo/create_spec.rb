@@ -21,13 +21,13 @@ RSpec.describe Todo::Create do
 
   	if todo.list.name.blank?
 	  	todo_list = TodoList.find_or_create_by(name: "Default To-do List")
-			todo.todo_list.name = todo_list
+			todo.list.name = todo_list
 		end
   	expect(todo.list.name).to eq("Default To-do List")
   end
 
   it 'creates user if todo_list is not assigned for a user' do
-		expect(subject.list.user).to be("Guest")  
+		expect(subject.list.username).to be("Guest")  
 	end
 
 
