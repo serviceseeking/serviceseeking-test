@@ -14,33 +14,31 @@
 ActiveRecord::Schema.define(version: 20160111030826) do
 
   create_table "todo_lists", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "todo_lists", ["user_id"], name: "index_todo_lists_on_user_id", using: :btree
+  add_index "todo_lists", ["user_id"], name: "index_todo_lists_on_user_id"
 
   create_table "todos", force: :cascade do |t|
-    t.string   "title",        limit: 255
-    t.string   "description",  limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "todo_list_id", limit: 4
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "todo_list_id"
   end
 
-  add_index "todos", ["todo_list_id"], name: "index_todos_on_todo_list_id", using: :btree
+  add_index "todos", ["todo_list_id"], name: "index_todos_on_todo_list_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",      limit: 255
-    t.string   "fullname",      limit: 255
-    t.string   "password_hash", limit: 255
-    t.string   "password_salt", limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "username"
+    t.string   "fullname"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_foreign_key "todo_lists", "users"
-  add_foreign_key "todos", "todo_lists"
 end
