@@ -19,7 +19,7 @@ class Todo::Create < Trailblazer::Operation
 
     # build the todo
     todo = @model = Todo.new(params[:todo])
-
+    validate(params[:todo])
     # find or create the parent list for the todo
     if params[:todo_list_id].blank?
       todo_list = TodoList.find_or_create_by(name: "Default To-do List")
