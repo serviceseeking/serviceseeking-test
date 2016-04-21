@@ -18,12 +18,16 @@ class Todo::Create < Trailblazer::Operation
     @model = Todo.new(params.require(:todo).permit(:title, :description))
     
     validate(params[:todo], @model) do |f|
-      f.save
+      todo_list = params[:todo_list_id].blank? ? check_default(params) : TodoList.find(params[:todo_list_id])
+      @model.title = f.title
+      @model.list = todo_list
+      @model.save
+      #f.save
     end
 
-    todo_list = params[:todo_list_id].blank? ? check_default(params) : TodoList.find(params[:todo_list_id])
-    @model.list = todo_list
-    @model.save!
+    #todo_list = params[:todo_list_id].blank? ? check_default(params) : TodoList.find(params[:todo_list_id])
+    #@model.list = todo_list
+    #@model.save!
   end
 
   def check_default(params)
