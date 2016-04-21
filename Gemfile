@@ -11,6 +11,8 @@ gem 'jquery-rails'
 group :development, :test do
   gem 'rspec-rails'
   gem 'byebug'
+  gem 'pry'
+  gem 'pry-byebug'
 end
 
 group :development do
@@ -29,11 +31,14 @@ gem 'autoprefixer-rails'
 gem 'slim-rails'
 
 # # Trailblazer framework
-gem 'trailblazer'
-gem 'trailblazer-rails' # if you are in rails.
+gem 'trailblazer', '~> 1.1'
+gem 'trailblazer-rails', '~> 0.2' # if you are in rails.
+gem 'trailblazer-loader'
 
 gem 'cells'
 gem 'cells-slim'
 
 # Rest client
 gem 'rest'
+gem 'simple_form'
+gem 'bcrypt'

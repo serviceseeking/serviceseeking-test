@@ -1,3 +1,3 @@
 class User < ActiveRecord::Base
-  has_many :todo_lists
+  has_many :todo_lists, dependent: :destroy
 end
