@@ -14,7 +14,6 @@ class Todo::Create < Trailblazer::Operation
   def process(params)
     # make sure title is not blank
     
-    return invalid! if params[:todo][:title].blank?
     @model = Todo.new(params.require(:todo).permit(:title, :description))
     
     validate(params[:todo], @model) do |f|
@@ -24,10 +23,6 @@ class Todo::Create < Trailblazer::Operation
       @model.save
       #f.save
     end
-
-    #todo_list = params[:todo_list_id].blank? ? check_default(params) : TodoList.find(params[:todo_list_id])
-    #@model.list = todo_list
-    #@model.save!
   end
 
   def check_default(params)
