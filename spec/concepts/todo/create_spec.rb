@@ -14,7 +14,7 @@ RSpec.describe Todo::Create do
       expect(@todo).to be_valid
     end
 
-    it 'is invalid' do
+    it 'is not valid' do
       @todo.title = nil
       expect(@todo.title).to be_nil
     end
@@ -27,7 +27,7 @@ RSpec.describe Todo::Create do
       expect(@user).to be_valid
     end
 
-    it 'is invalid' do
+    it 'is not valid' do
       @user.fullname = nil
       expect(@user.fullname).to be_nil
     end
@@ -40,7 +40,7 @@ RSpec.describe Todo::Create do
       expect(@todo_list).to be_valid
     end
 
-    it 'is invalid' do
+    it 'is not valid' do
       @todo_list.name = nil
       expect(@todo_list.name).to be_nil
     end
