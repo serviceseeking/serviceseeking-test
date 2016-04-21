@@ -1,30 +1,29 @@
 class Todo::Create < Trailblazer::Operation
-
+  # i put this because when we enter a nil or blank title form i got error undefine title
+  include Model
+  model Todo
   #builds do |params|
-    #return Todo if !params[:todo][:title].blank?
+    #return invalid! if params[:todo][:title].blank?
   #end
 
   contract do
+    property :title, validates: {presence: true}
     #validates :title, presence: true
-    #property :title, validates: {presence: true}
   end
 
   def process(params)
     # make sure title is not blank
-    validates(params[:todo][:title]) do
-      railse "test".inspect
-    end
+    
     return invalid! if params[:todo][:title].blank?
+    @model = Todo.new(params.require(:todo).permit(:title, :description))
+    
+    validate(params[:todo], @model) do |f|
+      f.save
+    end
 
-    # build the todo
-    todo = @model = Todo.new(params.require(:todo).permit(:title, :description))
-
-    # find or create the parent list for the todo
     todo_list = params[:todo_list_id].blank? ? check_default(params) : TodoList.find(params[:todo_list_id])
-
-    # associate the todo with the todo_list
-    todo.list = todo_list
-    todo.save!
+    @model.list = todo_list
+    @model.save!
   end
 
   def check_default(params)
