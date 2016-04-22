@@ -17,17 +17,12 @@ class Todo::Create < Trailblazer::Operation
     @model = Todo.new(params.require(:todo).permit(:title, :description))
     
     validate(params[:todo], @model) do |f|
-      todo_list = params[:todo_list_id].blank? ? TodoList::Create.(params) : TodoList.find(params[:todo_list_id])
-      #todo_list = params[:todo_list_id].blank? ? check_default(params) : TodoList.find(params[:todo_list_id])
+      todo_list = params[:todo_list_id].blank? ? TodoList::Create.(params).model : TodoList.find(params[:todo_list_id])
       @model.title = f.title
-      @model.list = todo_list.model
+      @model.list = todo_list
       @model.save
       #f.save
     end
-  end
-  
-  def check_users(params)
-    #params[:current_user_id].nil? ? User.create!(fullname: "Guest") : User.find(params[:current_user_id])
   end
 
 end
