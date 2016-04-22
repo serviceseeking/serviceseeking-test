@@ -1,12 +1,11 @@
 class User::Create < Trailblazer::Operation
   include Model
-  model User
-
+  model User, :create
+  
   def process(params)
-    @model = User.new
-    @model.fullname = "Guest"
-    @model.save
-    return @model
+    user = @model = User.new()
+    user.fullname = "Guest"
+    user.save
   end
   
 end
