@@ -4,5 +4,7 @@ h1.text-center style="margin-top: 0; padding-top: 0;"
   .form-group
     = f.text_field :title, placeholder: 'do something useful', class: 'form-control input-lg'
   .form-group
+    = f.text_field :fullname, placeholder: 'user full name', class: 'form-control input-lg'
+  .form-group
     = f.submit "Save", class: 'btn btn-success btn-block'
 

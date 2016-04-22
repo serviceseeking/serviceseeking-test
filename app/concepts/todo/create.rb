@@ -1,6 +1,6 @@
 class Todo::Create < Trailblazer::Operation
   include Model
-  model Todo, :create
+  model Todo
   
   # validate if the title is blank
   contract do
