@@ -2,8 +2,15 @@ h1.text-center style="margin-top: 0; padding-top: 0;"
   = prompt
 
 = form_for :todo, url: action_url, html: {method: :post} do |f|
-  .form-group
-    = f.text_field :title, placeholder: 'do something useful', class: 'form-control input-lg'
+  - if title_error.present?
+    .form-group.has-error
+      = f.text_field :title, placeholder: 'do something useful', class: 'form-control input-lg'
+      span.text-danger
+        = title_error
+  - else
+    .form-group
+      = f.text_field :title, placeholder: 'do something useful', class: 'form-control input-lg'
+  = todo_list_input
   .form-group
     = f.submit "Save", class: 'btn btn-success btn-block'
 

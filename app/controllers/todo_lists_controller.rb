@@ -1,7 +1,19 @@
 class TodoListsController < ApplicationController
 
   def index
-    @todo_lists = TodoList.all
+    @todo_lists = TodoList.includes(:todos).all
+  end
+
+  def new
+    form TodoList::Create
+  end
+
+  def create
+    run TodoList::Create do
+      return redirect_to @model, notice: "To-do List was successfully created!"
+    end
+
+    render :new
   end
 
   def show

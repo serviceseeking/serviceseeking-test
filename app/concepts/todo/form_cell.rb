@@ -1,11 +1,10 @@
 class Todo::FormCell < Cell::Concept
-
   def show
     render
   end
 
   private
-
+  
   include ActionView::Helpers::FormHelper
 
   def prompt
@@ -21,11 +20,23 @@ class Todo::FormCell < Cell::Concept
   end
 
   def todo_list
-    TodoList.where(params[:todo_list_id]).first
+    TodoList.where(id: params[:todo_list_id]).first
+  end
+
+  def todo_list_input
+    hidden_field(:todo, :todo_list_id, :value => params[:todo_list_id]) if todo_list.present?
+  end
+
+  def title_error
+    options[:errors].messages[:title].first if options[:errors].present?
   end
 
   def action_url
-    parent_controller.todos_path
+    if todo_list.present?
+      parent_controller.todo_list_todos_path
+    else
+      parent_controller.todos_path
+    end 
   end
 
 end

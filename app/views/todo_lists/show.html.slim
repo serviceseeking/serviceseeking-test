@@ -1,6 +1,12 @@
-p#notice = notice
-p#alert = alert
-
+- if notice.present?
+  div.alert.alert-success
+    a.close aria-label="close" data-dismiss="alert" href="#"  ×
+    p#notice = notice
+- if alert.present?
+  div.alert.alert-danger
+    a.close aria-label="close" data-dismiss="alert" href="#"  ×
+    p#alert = alert
+  
 h2 Listing items on #{@todo_list.name}
 
 table.table
