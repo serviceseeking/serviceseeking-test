@@ -1,48 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Todo::Create do
-  before(:each) do
-    @todo = Todo.new()
-    @user = User.new()
-    @todo_list = TodoList.new()
-  end
+   let!(:user) { User.create fullname: "Guest" }
+   let!(:todo_list) { TodoList.create!(name: "Refactor List", user_id: user.id)}
 
-  describe Todo do
-    it 'is Valid' do
-      @todo.title = "Do Refactoring"
-      expect(@todo.title).to eq("Do Refactoring")
-      expect(@todo).to be_valid
-    end
+   it "create todo and assign the existing list" do
+      @todo = Todo::Create.(todo: {title: "Todo Refactor", description: "Todo Description", list: todo_list}).model
+      expect(@todo.todo_list_id).equal? todo_list.id
+   end
 
-    it 'is not valid' do
-      @todo.title = nil
-      expect(@todo.title).to be_nil
-    end
-  end
+   it "should create a todo and assign it to a existing list" do
+      @todo = Todo::Create.(todo: { title: 'todo title', description: 'todo description'}).model
+    	
+      expect(@todo.todo_list_id).equal? todo_list.id
+   end
 
-  describe User  do
-    it 'is Valid' do
-      @user.fullname = "Guest"
-      expect(@user.fullname).to eq("Guest")
-      expect(@user).to be_valid
-    end
-
-    it 'is not valid' do
-      @user.fullname = nil
-      expect(@user.fullname).to be_nil
-    end
-  end
-
-  describe TodoList do
-    it 'is valid' do
-      @todo_list.name = "Default To-do List"
-      expect(@todo_list.name).to eq("Default To-do List")
-      expect(@todo_list).to be_valid
-    end
-
-    it 'is not valid' do
-      @todo_list.name = nil
-      expect(@todo_list.name).to be_nil
-    end
-  end
+   
 end

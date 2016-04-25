@@ -1,22 +1,24 @@
 class Todo::Create < Trailblazer::Operation
   include Model
-  model Todo
+  model Todo, :create
   
-  # validate if the title is blank
   contract do
     property :title, validates: {presence: true}
+    property :list
+    property :description
   end
 
   def process(params)
-    
-    todo = @model = Todo.new(params.require(:todo).permit(:title, :description))
-    
     validate(params[:todo], @model) do |f|
-      todo_list = params[:todo_list_id].blank? ? TodoList::Create.(params).model : TodoList.find(params[:todo_list_id])
-      todo.title = f.title
-      todo.list = todo_list
-      todo.save
+      f.list = find_lists(params)
+      f.save
     end
+  end
+
+  private
+
+  def find_lists(params)
+    TodoList::Create.(params).model
   end
 
 end

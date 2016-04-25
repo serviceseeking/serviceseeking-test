@@ -10,10 +10,9 @@ class User::Create < Trailblazer::Operation
   def process(params)
     params[:todo][:fullname] = params[:todo][:fullname].blank? ? "Guest" : params[:todo][:fullname]
     validate(params[:todo],@model) do |f|
-      user = @model
-      user.fullname = f.fullname
-      user.save
+      f.save
     end
   end
   
 end
+
