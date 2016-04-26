@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+    title SsTest
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  body
+    .nav.navbar.navbar-default.navbar-static-top
+      .container-fluid
+        .navbar-header
+          .navbar-brand
+            a href="/"  Todo
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              a href="/todo_lists"  List
+          form.navbar-form.navbar-left
+          ul.nav.navbar-nav.navbar-right
+            - if !current_user
+              li = link_to "sign up", sign_up_path
+              li = link_to "sign in", sign_in_path
+            - else
+              li = link_to "Welcome #{current_user.fullname}"
+              li = link_to "logout", log_out_path
+    p
+      p
+        .container style=("margin-top: 50px;")
+          - if notice
+              .alert.alert-success.success-alert role="alert"
+                = notice
+          - if alert
+            .alert.alert-warning role="alert"
+              = alert
+          - if @form && @form.errors.count > 0
+           div(class="alert alert-danger")
+             - @form.errors.messages.each do |e|
+               - e[1].each do |message|
+                 div
+                   = "#{e[0].to_s.humanize} #{message}"
+          = yield

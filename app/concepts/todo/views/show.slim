@@ -1,0 +1,12 @@
+= form_for @model, url: action_url do |f|
+  .panel.panel-default
+    .panel-heading
+      h4 
+        = "#{controller.action_name.capitalize} Todo"
+    .panel-body
+      .form-group
+        = f.text_field :title, placeholder: 'do something useful', class: 'form-control input-lg'
+    .panel-footer
+      .pull-right
+        = f.submit class: 'btn btn-success'
+      .clearfix
