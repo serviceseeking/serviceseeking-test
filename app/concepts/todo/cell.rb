@@ -14,8 +14,6 @@ class Todo::Cell < ::Cell::Concept
 
   private
 
-  include ActionView::Helpers::FormHelper
-
   def prompt
     options[:prompt] || default_prompt
   end

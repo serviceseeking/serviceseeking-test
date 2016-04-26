@@ -37,7 +37,6 @@ module Session
   class Create < Trailblazer::Operation
     include Model
     include BCrypt
-    include Dispatch
     model User, :create
 
     contract do
@@ -92,7 +91,6 @@ module Session
 
   class Delete < Trailblazer::Operation
     include Model
-    include Dispatch
     model User, :find
 
     def process(params)

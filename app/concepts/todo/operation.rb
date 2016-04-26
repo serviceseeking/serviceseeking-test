@@ -1,6 +1,6 @@
-class Todo::Create < Trailblazer::Operation
+class Todo::BaseClass < Trailblazer::Operation
   include Model
-  model Todo, :create
+  model Todo
 
   contract do
     property :title, validates: { presence: true }
@@ -10,31 +10,18 @@ class Todo::Create < Trailblazer::Operation
   end
 
   def process(params)
-    # validate and save
     validate(params[:todo]) do
       contract.save
     end
   end
-
 end
 
-class Todo::Update < Trailblazer::Operation
-  include Model
-  model Todo, :update
+class Todo::Create <  Todo::BaseClass
+  action :create
+end
 
-  contract do
-    property :title, validates: { presence: true }
-    property :description
-    property :completed
-  end
-
-  def process(params)
-    # validate and save
-    validate(params[:todo]) do
-      contract.save
-    end
-  end
-
+class Todo::Update < Todo::BaseClass
+  action :update
 end
 
 
