@@ -30,17 +30,6 @@ class TodoList::Create < Trailblazer::Operation
 
     def setup_model!(params)
       model.name = TodoList::DEFAULT_NAME unless model.name.present?
-      model.user = set_user!(params)
+      model.user = User::Create.get_user(params)
     end
-
-    def set_user!(params)
-      return params[:current_user] if params[:current_user].present?
-     
-      if params[:current_user_id].nil?
-        User.create!(fullname: "Guest")
-      else
-        User.find(params[:current_user_id])
-      end
-    end
-
 end
