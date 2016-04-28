@@ -6,7 +6,7 @@ class Todo::Create < Trailblazer::Operation
 
   def process(params)
     if params[:todo]
-      todo = @model = Todo.new(params[:todo])
+      todo = @model = Todo.new(params.require(:todo).permit(:title, :description))
       todo_list = TodoList.find_or_create_by(name: "Default To-do List")
       current_user =
         if params[:current_user] == nil
