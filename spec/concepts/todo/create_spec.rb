@@ -1,7 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Todo::Create do
-  it "can be spec'd" do
-    raise "Implement me"
+RSpec.describe Todo::Create, type: :operation do
+  it "creates todo" do
+    todo = Todo::Create.(todo:
+      { title: "Sample Task", description: "Sample Description" }
+    ).model
+
+    expect(todo.title).to eq("Sample Task")
+    expect(todo.description).to eq("Sample Description")
   end
 end
