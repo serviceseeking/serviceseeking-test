@@ -12,6 +12,7 @@ class Todo::Create < Trailblazer::Operation
 
   def process(params)
     validate(params[:todo]) do |todo_item|
+
       if params[:todo_list_id].present?
         todo_list = TodoList.find(params[:todo_list_id])
       else
