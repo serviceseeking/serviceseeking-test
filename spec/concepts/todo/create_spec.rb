@@ -7,6 +7,5 @@ RSpec.describe Todo::Create, type: :operation do
     ).model
 
     expect(todo.title).to eq("Sample Task")
-    expect(todo.description).to eq("Sample Description")
   end
 end

@@ -3,11 +3,8 @@ class Todo::Create < Trailblazer::Operation
   model Todo, :create
 
   contract do
-    property :title
-    property :description
+    property :title, validates: { presence: true }
     property :list
-
-    validates :title, presence: true
   end
 
   def process(params)
