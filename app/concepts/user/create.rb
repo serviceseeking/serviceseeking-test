@@ -2,15 +2,14 @@ class User::Create < Trailblazer::Operation
   include Model
   model User, :create
 
-  def process(params)
-    model = find_or_create_user(params)
+  contract do
+    property :fullname
   end
 
-  def find_or_create_user(params)
-    if params[:user][:id].present?
-      user = User.find(params[:user][:id])
-    else
-      user = User.create(fullname: "Guest")
+  def process(params)
+    validate(params[:user]) do |user|
+      @model = User.find_by_id(user.id) ||
+        User.find_or_create_by(fullname: "Guest")
     end
   end
 end

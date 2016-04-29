@@ -3,22 +3,14 @@ class TodoList::Create < Trailblazer::Operation
   model TodoList, :create
 
   contract do
-    property :user_id
     property :name
   end
 
   def process(params)
     validate(params[:todo_list]) do |todo_list|
-      model = find_or_create_todolist(params)
-      model.user = find_or_create_user(params)
-    end
-  end
-
-  def find_or_create_todolist(params)
-    if params[:todo_list][:id].present?
-      todo_list = TodoList.find(params[:todo_list][:id])
-    else
-      todo_list = TodoList.find_or_create_by(name: "Default To-do List")
+      @model = TodoList.find_by_id(todo_list.id) ||
+        TodoList.find_or_create_by(name: "Default To-do List")
+      @model.user = find_or_create_user(params)
     end
   end
 
