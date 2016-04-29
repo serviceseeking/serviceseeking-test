@@ -8,7 +8,7 @@ class User::Create < Trailblazer::Operation
 
   def process(params)
     validate(params[:user]) do |user|
-      @model = User.find_by_id(user.id) ||
+      @model = User.find_by_id(params[:user][:id]) ||
         User.find_or_create_by(fullname: "Guest")
     end
   end
