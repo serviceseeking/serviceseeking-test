@@ -1,6 +1,7 @@
 class TodosController < ApplicationController
 
   def new
+    form Todo::Create
   end
 
   def create
@@ -8,7 +9,6 @@ class TodosController < ApplicationController
       return redirect_to @model.list, notice: "To-do was successfully created!"
     end
 
-    flash.now[:alert] = "Missing todo title"
     render :new
   end
 

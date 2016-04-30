@@ -1,10 +1,20 @@
-h1 Your Todo Lists
+h1 
+  Your Todo Lists
+  = link_to "Add New Todo List", new_todo_list_path, class: "btn btn-success pull-right"
 
-table.table
-  thead
-    tr
-      th Name
-  tbody
-    - @todo_lists.each do |todo_list|
-      tr
-        td = link_to todo_list.name, todo_list
+- @todo_lists.each do |todo_list|
+  .col-lg-12
+    .panel.panel-primary
+      .panel-heading
+        = todo_list.name
+      .panel-body
+        table.table
+          tbody
+            - todo_list.todos.first(5).each do |todo|
+              tr
+                td= todo.title
+            td
+              = link_to "", new_todo_list_todo_path(todo_list), class: 'btn btn-success glyphicon glyphicon-plus'
+              
+
+        = link_to "View All", todo_list if todo_list.todos.count > 5
