@@ -19,6 +19,6 @@ class Todo::Create < Trailblazer::Operation
   private
 
     def setup_model!(todo_params)
-      model.list = TodoList::Create.get_todo_list(todo_params)
+      model.list = TodoList::SetList.(todo_list: {id: todo_params[:todo_list_id]}).model
     end
 end
