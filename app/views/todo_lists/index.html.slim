@@ -8,3 +8,5 @@ table.table
     - @todo_lists.each do |todo_list|
       tr
         td = link_to todo_list.name, todo_list
+
+= link_to "Create a new List", new_todo_list_path, class: 'btn btn-success'
