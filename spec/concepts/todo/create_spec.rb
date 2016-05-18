@@ -8,22 +8,22 @@ end
 
   context "when given a todo with no title" do
     todo_params = ActionController::Parameters.new(todo: {title: nil})
-    op = Todo::Create.(todo_params)
+
     it "should not create a todo item" do
+      res, op = Todo::Create.run(todo_params)
       expect(op.model.id).to be_nil
+      expect(res).to be_falsey
     end
   end
 
   context "when given a todo with title" do
     todo_params = ActionController::Parameters.new(todo: {title: "something"})
-    op = Todo::Create.(todo_params)
+    res, op = Todo::Create.run(todo_params)
 
-    it "should create a todo item" do
+    it "should create a valid todo item" do
       expect(op.model.id).not_to be_nil
-    end
-
-    it "should belong to a todo list" do
       expect(op.model.todo_list_id).not_to be_nil
+      expect(res).to be true
     end
 
   end
