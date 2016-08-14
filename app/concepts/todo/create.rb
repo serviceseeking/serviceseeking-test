@@ -1,4 +1,11 @@
 class Todo::Create < Trailblazer::Operation
+  contract do
+    property :title
+    property :description
+    property :todo_list_id
+
+    validates :title, presence: true
+  end
 
   # Logic for creating a TODO
   #     if `todo_list` is specified
@@ -11,11 +18,8 @@ class Todo::Create < Trailblazer::Operation
   #         associate `todo_list` with `user`
   #         associate `todo` with `todo_list`
   def process(params)
-    # make sure title is not blank
-    return invalid! if params[:todo][:title].blank?
-
     # build the todo
-    todo = @model = Todo.new(params.require(:todo).permit(:title, :description))
+    todo = @model = Todo.new
 
     # find or create the parent list for the todo
     if params[:todo_list_id].blank?
@@ -44,7 +48,9 @@ class Todo::Create < Trailblazer::Operation
 
     # associate the todo with the todo_list
     todo.list = todo_list
-    todo.save!
-  end
 
+    validate(params[:todo], todo) do |f|
+      f.save
+    end
+  end
 end
