@@ -4,6 +4,7 @@ h1.text-center style="margin-top: 0; padding-top: 0;"
 = form_for :todo, url: action_url, html: {method: :post} do |f|
   .form-group
     = f.text_field :title, placeholder: 'do something useful', class: 'form-control input-lg'
+    = f.hidden_field :todo_list_id, value: params[:todo_list_id]
   .form-group
     = f.submit "Save", class: 'btn btn-success btn-block'
 

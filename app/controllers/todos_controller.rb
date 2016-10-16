@@ -4,12 +4,13 @@ class TodosController < ApplicationController
   end
 
   def create
-    run Todo::Create do
-      return redirect_to @model.list, notice: "To-do was successfully created!"
+    todo = run Todo::Create
+    if todo.errors.any?
+      flash.now[:alert] = todo.errors.full_messages.join(",")
+      render :new
+    else
+      return redirect_to todo.model.list, notice: "To-do was successfully created!"
     end
-
-    flash.now[:alert] = "Missing todo title"
-    render :new
   end
 
 end
