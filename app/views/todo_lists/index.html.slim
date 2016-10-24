@@ -1,10 +1,26 @@
-h1 Your Todo Lists
+h1 = tyrant.signed_in? ? "#{tyrant.current_user.fullname}'s Todo List" : "Todo Lists"
+
+
+=link_to new_todo_list_path, class: "btn btn-success pull-right" do 
+  span class="glyphicon glyphicon-plus" aria-hidden="true"
 
 table.table
   thead
     tr
       th Name
+      th By
+      - if tyrant.signed_in?
+        th Actions
   tbody
-    - @todo_lists.each do |todo_list|
+    - (tyrant.signed_in? ? (tyrant.current_user.todo_lists) : @todo_lists).each do |todo_list|
       tr
-        td = link_to todo_list.name, todo_list
+        td = link_to todo_list.name, todo_list_path(todo_list)
+        td = todo_list.user.fullname
+        - if tyrant.signed_in? 
+          td 
+            = link_to edit_todo_list_path(todo_list), class: "btn btn-success" do
+              span class="glyphicon glyphicon-edit" aria-hidden="true"
+            = link_to todo_list_path(todo_list), class: "btn btn-primary" do
+              span class="glyphicon glyphicon-eye-open" aria-hidden="true"
+            = link_to "", class: "btn btn-danger" do
+              span class="glyphicon glyphicon-trash" aria-hidden="true"

@@ -1,0 +1,19 @@
+.well style="margin-top: 20px; width: 50%; margin-left: auto; margin-right: auto;"
+	=form_for(@form, url: sessions_signing_up_path) do |f| 
+		h2 Sign Up
+		- if @form.errors.any?
+		  #error_explanation class="alert alert-danger"
+		    h2 = "#{pluralize(@form.errors.count, "error")} prohibited this user from being saved:"
+		    ul
+		      - @form.errors.full_messages.each do |message|
+		        li = message
+
+		.field
+			= f.text_field :username, placeholder: 'Username', class: 'form-control input-lg'
+			= f.password_field :password, placeholder: 'Password', class: 'form-control input-lg'
+			= f.password_field :confirm_password, placeholder: 'Confirm', class: 'form-control input-lg'
+			= f.text_field :fullname, placeholder: 'Full name', class: 'form-control input-lg'
+			br
+		.actions = f.submit "Sign up!", class: 'btn btn-success btn-block'
+
+	h4 =link_to "Log in", sessions_sign_in_path

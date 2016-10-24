@@ -1,5 +1,7 @@
-h1 New todo_list
+.well style="margin-top: 20px; width: 50%; margin-left: auto; margin-right: auto;"
+	= form_for @form do |f|
+		h2 Create Todo List
+		== render :partial => 'form', :locals => {:f => f}
+		= f.submit "Save", class: 'btn btn-success btn-block'
 
-== render 'form'
-
-= link_to 'Back', todo_lists_path
+	= link_to 'Back', todo_lists_path

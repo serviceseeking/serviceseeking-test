@@ -1,9 +1,23 @@
 Rails.application.routes.draw do
-  root to: 'pages#index'
 
-  resources :todo_lists, only: %i(index show) do
-    resources :todos, only: %i(new create)
+  root to: 'sessions#sign_in'
+
+  resources :todo_lists do
+    #resources :todos, only: %i(new create)
+    member do
+    	post :create_todo
+    end
   end
 
-  resources :todos, only: :create
+  resources :todos, only: [:new, :create]
+
+  namespace "sessions" do
+  	get "sign_up"
+  	post "signing_up"
+  	get "sign_out"
+  	get "sign_in"
+  	post "signing_in"
+  end
+ 
+
 end

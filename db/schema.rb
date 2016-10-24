@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111030826) do
+ActiveRecord::Schema.define(version: 20161023154217) do
 
   create_table "todo_lists", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -33,13 +33,18 @@ ActiveRecord::Schema.define(version: 20160111030826) do
   add_index "todos", ["todo_list_id"], name: "index_todos_on_todo_list_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",      limit: 255
-    t.string   "fullname",      limit: 255
-    t.string   "password_hash", limit: 255
-    t.string   "password_salt", limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "username",        limit: 255
+    t.string   "fullname",        limit: 255
+    t.string   "password_digest", limit: 255
+    t.string   "password_salt",   limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "confirm_token",   limit: 255
+    t.datetime "confirm_at"
+    t.text     "auth_meta_data",  limit: 65535
   end
+
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   add_foreign_key "todo_lists", "users"
   add_foreign_key "todos", "todo_lists"

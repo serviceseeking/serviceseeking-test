@@ -1,31 +1,31 @@
 class Todo::FormCell < Cell::Concept
 
-  def show
-    render
-  end
+  # def show
+  #   render
+  # end
 
-  private
+  # private
 
-  include ActionView::Helpers::FormHelper
+  # include ActionView::Helpers::FormHelper
 
-  def prompt
-    options[:prompt] || default_prompt
-  end
+  # def prompt
+  #   options[:prompt] || default_prompt
+  # end
 
-  def default_prompt
-    if todo_list.present?
-      "Create a new todo on #{todo_list.name}"
-    else
-      "What would you like to do?"
-    end
-  end
+  # def default_prompt
+  #   if todo_list.present?
+  #     "Create a new todo on #{todo_list.name}"
+  #   else
+  #     "What would you like to do?"
+  #   end
+  # end
 
-  def todo_list
-    TodoList.where(params[:todo_list_id]).first
-  end
+  # def todo_list
+  #   TodoList.where(params[:todo_list_id]).first
+  # end
 
-  def action_url
-    parent_controller.todos_path
-  end
+  # def action_url
+  #   parent_controller.todos_path
+  # end
 
 end

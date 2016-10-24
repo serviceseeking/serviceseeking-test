@@ -1,0 +1,9 @@
+.well style="margin-top: 20px; width: 50%; margin-left: auto; margin-right: auto;"
+	= form_for(:session, url: sessions_signing_in_path) do |f| 
+		h2 Login
+		.field
+			= f.text_field :username, placeholder: 'Username', class: 'form-control input-lg'
+			= f.password_field :password, placeholder: 'Password', class: 'form-control input-lg'
+		.actions = f.submit "Login", class: 'btn btn-primary btn-block'
+
+	h4 =link_to "Sign up", sessions_sign_up_path
