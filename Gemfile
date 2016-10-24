@@ -37,3 +37,6 @@ gem 'cells-slim'
 
 # Rest client
 gem 'rest'
+
+gem "tyrant"
+gem "faker", '~> 1.6.6'

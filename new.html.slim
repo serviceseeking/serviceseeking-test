@@ -1,0 +1,12 @@
+.well style="margin-top: 20px; width: 50%; margin-left: auto; margin-right: auto;"
+  /= concept('todo/form_cell', @model, todo_list_id: params[:todo_list_id])
+  h1.text-center style="margin-top: 0; padding-top: 0;"
+    /= prompt
+  = form_for :todo, url: todos_path do |f|
+  	h2 Todo
+  	== render :partial => 'form', :locals => {:f => f}
+
+  	h2 Todo List
+  	== render :partial => 'todo_lists/form', :locals => {:f => f}
+  	br
+  	= f.submit "Save", class: 'btn btn-success btn-block'

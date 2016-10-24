@@ -1,0 +1,51 @@
+
+.new-todo-container
+	.caption Title
+	%input.title
+	.caption Description
+	%input.description
+	%button.add-new-todo Add
+
+%table.todo-list
+	%thead
+		%tr
+			%th Title
+			%th Description
+			%th Action
+	%tbody
+		- current_user.todos.each do |todo|
+			%tr{'data-todo-id' => todo.id}
+				%td.title
+					= todo.title
+				%td.description
+					= todo.description
+				%td.action
+					= link_to 'Edit', edit_todo_path(todo)
+					%a#destroy{href:"/destroy_todo/#{todo.id}"} Destroy
+
+:javascript
+	$(function(){
+		$('.add-new-todo').click(function(event){
+			var title, description;
+			title = $('input.title').val()
+			description = $('input.description').val()
+			$.ajax({
+				url: '/todos',	method: 'POST',
+				data: {'title': title,
+						'description': description
+				},
+			}).done(function(data){
+				window.location.assign('/list')
+			});
+		})
+
+		$('#destroy').click(function(event){
+			event.preventDefault()
+			var test = confirm("Are you sure you want to delete task?");
+			if (test == true){
+				window.location.assign($(event.currentTarget).attr('href'))
+			}
+		});
+
+
+	});

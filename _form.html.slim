@@ -1,0 +1,14 @@
+- if @todo.errors.any?
+  #error_explanation
+    h2 = "#{pluralize(@todo.errors.count, "error")} prohibited this todo_list from being saved:"
+    ul
+      - @todo.errors.full_messages.each do |message|
+        li = message
+
+.form-group
+  = f.hidden_field :current_user_id, value: (tyrant.current_user.nil? ? nil : tyrant.current_user.id)
+  = f.text_field :title, placeholder: 'do something useful', class: 'form-control input-lg'
+  = f.text_area :description, placeholder: 'say someting about it', class: 'form-control input-lg'
+.form-group
+  
+
