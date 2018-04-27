@@ -1,4 +1,4 @@
-# Test Submission ##
+# Test Submission
 1. Fork this repo.
 2. Clone your forked repo.
 3. Write your solution locally.
