@@ -8,6 +8,8 @@ default: &default
   adapter: mysql2
   pool: 5
   timeout: 5000
+  username: root
+  port: 3306
 
 development:
   <<: *default

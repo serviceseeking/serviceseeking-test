@@ -1,8 +1,9 @@
-h1 Editing todo_list
-
-== render 'form'
-
-= link_to 'Show', @todo_list
-'|
-= link_to 'Back', todo_lists_path
+.well style="margin-top: 20px; width: 50%; margin-left: auto; margin-right: auto;"
+	= form_for @todo_list, url: todo_list_path, :html => { method: :put} do |f|
+		h2 Create Todo List
+		== render :partial => 'form', :locals => {:f => f}
+		=f.submit "Save", class: 'btn btn-success btn-block'
+	= link_to 'Show', @todo_list
+	'|
+	= link_to 'Back', todo_lists_path
 
